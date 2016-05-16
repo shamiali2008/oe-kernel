@@ -257,6 +257,10 @@ int vgic_v3_dt_probe(struct device_node *vgic_node,
 	vgic->nr_lr = (ich_vtr_el2 & 0xf) + 1;
 	vgic->can_emulate_gicv2 = false;
 
+	/*Check GIC supports virt timer interrupt mapping to phys interrupt*/
+	vgic->timer_irqmap_disabled = of_property_read_bool(vgic_node,
+						"timer-irqmap-disabled");
+
 	if (of_property_read_u32(vgic_node, "#redistributor-regions", &gicv_idx))
 		gicv_idx = 1;
 

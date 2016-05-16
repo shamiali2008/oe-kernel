@@ -1712,6 +1712,11 @@ static struct list_head *vgic_get_irq_phys_map_list(struct kvm_vcpu *vcpu,
 		return &vcpu->kvm->arch.vgic.irq_phys_map_list;
 }
 
+bool kvm_vgic_support_timer_irqmap(void)
+{
+        return (vgic->timer_irqmap_disabled) ? false : true;
+}
+
 /**
  * kvm_vgic_map_phys_irq - map a virtual IRQ to a physical IRQ
  * @vcpu: The VCPU pointer
